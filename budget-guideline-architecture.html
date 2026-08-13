@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>예산운영지침 웹페이지 · MCP 서버 관계도</title>
+<style>
+  body {
+    margin: 0;
+    padding: 24px;
+    background: #f7f8fa;
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 { font-size: 20px; color: #1f2937; margin: 0 0 4px; }
+  p.sub { font-size: 13px; color: #6b7280; margin: 0 0 20px; }
+  svg { max-width: 1120px; width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<h1>예산운영지침: 하나의 원천, 두 개의 창구</h1>
+<p class="sub">hyu-planning/budget-guidelines · budget-guideline-mcp 실제 구조 기준 (2026.8)</p>
+
+<svg viewBox="0 0 1120 880" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="예산운영지침 데이터, 웹페이지, MCP 서버의 관계도">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#d97706"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/>
+    </marker>
+  </defs>
+
+  <!-- ===== 원천 데이터 ===== -->
+  <rect x="330" y="28" width="460" height="112" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text x="560" y="60" font-size="17" font-weight="700" fill="#92400e" text-anchor="middle">📄 budget-guidelines (사내 Gitea 저장소)</text>
+  <text x="560" y="86" font-size="13" fill="#78350f" text-anchor="middle">docs/ 마크다운 = 예산운영지침 원천 데이터 (Single Source of Truth)</text>
+  <text x="560" y="108" font-size="12.5" font-weight="600" fill="#b45309" text-anchor="middle">✏️ 지침 개정 → 이 저장소에만 커밋 (이중 관리 없음)</text>
+
+  <!-- ===== 왼쪽: 사람용 경로 ===== -->
+  <path d="M 430 140 C 380 185, 300 210, 245 254" stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#arrowGreen)"/>
+  <text x="270" y="180" font-size="12" font-weight="600" fill="#166534" text-anchor="middle">Docusaurus 정적 빌드</text>
+  <text x="270" y="197" font-size="11" fill="#15803d" text-anchor="middle">(정보통신처 공용 Gitea Pages 파이프라인)</text>
+
+  <text x="245" y="245" font-size="12.5" font-weight="700" fill="#166534" text-anchor="middle">👥 사람용 창구</text>
+
+  <rect x="60" y="256" width="370" height="118" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="245" y="288" font-size="16" font-weight="700" fill="#166534" text-anchor="middle">🌐 예산운영지침 웹페이지</text>
+  <text x="245" y="313" font-size="12.5" fill="#14532d" text-anchor="middle">정적 사이트 — 열람·탐색용 HTML</text>
+  <text x="245" y="335" font-size="12" fill="#15803d" text-anchor="middle">빌드 시점의 스냅샷</text>
+  <text x="245" y="355" font-size="12" fill="#15803d" text-anchor="middle">(개정 반영 = 재빌드·재배포)</text>
+
+  <path d="M 245 374 L 245 570" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="258" y="478" font-size="11.5" fill="#475569">브라우저로 열람 (HTTP)</text>
+
+  <rect x="125" y="576" width="240" height="90" rx="12" fill="#ffffff" stroke="#16a34a" stroke-width="1.8"/>
+  <text x="245" y="612" font-size="15" font-weight="700" fill="#166534" text-anchor="middle">👤 교직원</text>
+  <text x="245" y="638" font-size="12" fill="#14532d" text-anchor="middle">지침을 사람이 직접 읽음</text>
+
+  <!-- ===== 오른쪽: AI용 경로 ===== -->
+  <path d="M 690 140 C 730 175, 760 200, 790 248" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#arrowAmber)"/>
+  <text x="880" y="168" font-size="12" font-weight="600" fill="#92400e" text-anchor="middle">sparse checkout: docs/만 복제</text>
+  <text x="880" y="186" font-size="11.5" font-weight="600" fill="#dc2626" text-anchor="middle">⚠️ 현재는 수동 git pull로 갱신</text>
+  <text x="880" y="202" font-size="11" fill="#b45309" text-anchor="middle">(Gitea가 PAT·SSH 차단 — 자동 pull용</text>
+  <text x="880" y="217" font-size="11" fill="#b45309" text-anchor="middle">systemd timer는 준비만 된 상태)</text>
+
+  <text x="700" y="245" font-size="12.5" font-weight="700" fill="#1d4ed8" text-anchor="middle">🤖 AI용 창구</text>
+
+  <!-- 서버 박스 -->
+  <rect x="560" y="256" width="520" height="268" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="820" y="284" font-size="14.5" font-weight="700" fill="#1e40af" text-anchor="middle">🖥️ 사내 서버 166.104.101.141 — 사내망 전용 · 인증 없음</text>
+
+  <!-- CONTENT_DIR -->
+  <rect x="585" y="302" width="195" height="100" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.6"/>
+  <text x="682" y="330" font-size="13.5" font-weight="700" fill="#334155" text-anchor="middle">📂 CONTENT_DIR</text>
+  <text x="682" y="352" font-size="10.5" fill="#475569" text-anchor="middle">~/projects/budget-guidelines/docs</text>
+  <text x="682" y="372" font-size="11.5" fill="#475569" text-anchor="middle">md 원문 로컬 복제본</text>
+  <text x="682" y="390" font-size="11.5" fill="#475569" text-anchor="middle">(재작성 없음, 원본 그대로)</text>
+
+  <!-- 화살표 CONTENT_DIR → MCP -->
+  <path d="M 780 352 L 835 352" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#arrowBlue)"/>
+
+  <!-- MCP 서버 -->
+  <rect x="840" y="298" width="222" height="192" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="951" y="324" font-size="14" font-weight="700" fill="#1d4ed8" text-anchor="middle">⚙️ budget-guideline-mcp</text>
+  <text x="951" y="344" font-size="11" fill="#1e40af" text-anchor="middle">Node.js · systemd 상시 실행</text>
+  <text x="951" y="361" font-size="11" fill="#1e40af" text-anchor="middle">:3001/mcp (Streamable HTTP)</text>
+
+  <rect x="856" y="374" width="190" height="27" rx="13" fill="#ffffff" stroke="#60a5fa" stroke-width="1.3"/>
+  <text x="951" y="392" font-size="10.5" fill="#1d4ed8" text-anchor="middle">🔍 search_budget_guideline</text>
+  <rect x="856" y="408" width="190" height="27" rx="13" fill="#ffffff" stroke="#60a5fa" stroke-width="1.3"/>
+  <text x="951" y="426" font-size="10.5" fill="#1d4ed8" text-anchor="middle">📑 get_budget_guideline_document</text>
+  <rect x="856" y="442" width="190" height="27" rx="13" fill="#ffffff" stroke="#60a5fa" stroke-width="1.3"/>
+  <text x="951" y="460" font-size="10.5" fill="#1d4ed8" text-anchor="middle">🗂️ list_budget_guideline_categories</text>
+
+  <!-- 캐시 없음 캡션 -->
+  <text x="820" y="512" font-size="11.5" font-weight="600" fill="#1e40af" text-anchor="middle">tool 호출마다 CONTENT_DIR을 다시 읽음 (캐시 없음 → pull 직후 바로 최신 반영, 재시작 불필요)</text>
+
+  <!-- AI 에이전트 -->
+  <path d="M 880 524 C 870 545, 850 560, 830 574" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#arrowBlue)"/>
+  <path d="M 790 574 C 800 555, 815 542, 835 526" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#arrowBlue)"/>
+  <text x="920" y="556" font-size="11" fill="#1d4ed8">검색 결과·조항 전문</text>
+  <text x="700 " y="556" font-size="11" fill="#1d4ed8" text-anchor="end">도구 호출 (MCP)</text>
+
+  <rect x="620" y="578" width="400" height="96" rx="12" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+  <text x="820" y="610" font-size="15" font-weight="700" fill="#4338ca" text-anchor="middle">🤖 AI 에이전트 — 사내망 안 PC의 CLI</text>
+  <text x="820" y="634" font-size="12.5" fill="#4f46e5" text-anchor="middle">Claude Code · Gemini CLI (하네스 + LLM)</text>
+  <text x="820" y="656" font-size="11.5" fill="#6366f1" text-anchor="middle">"이 지출 지침상 가능해?" → 도구로 지침을 검색·조회해 답변</text>
+
+  <!-- 웹 커넥터 불가 노트 -->
+  <rect x="620" y="694" width="460" height="58" rx="10" fill="#fef2f2" stroke="#f87171" stroke-width="1.5"/>
+  <text x="850" y="718" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="middle">❌ claude.ai · ChatGPT 웹 커넥터는 연결 불가</text>
+  <text x="850" y="740" font-size="11.5" fill="#dc2626" text-anchor="middle">각 서비스 회사 서버가 MCP URL을 호출하는 구조 → 사내망 내부 IP에 도달 못 함</text>
+
+  <!-- ===== 하단 요약 ===== -->
+  <rect x="40" y="778" width="1040" height="84" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="65" y="806" font-size="13" fill="#1f2937">
+    <tspan font-weight="700" fill="#92400e">하나의 원천(md)</tspan> →
+    <tspan font-weight="700" fill="#166534"> 웹페이지</tspan> = 사람용 인터페이스 ·
+    <tspan font-weight="700" fill="#1d4ed8"> MCP 서버</tspan> = AI용 인터페이스. 둘 다 콘텐츠를 재작성하지 않는 "조회 계층"
+  </text>
+  <text x="65" y="832" font-size="13" fill="#1f2937">
+    저장소 분리: 콘텐츠(budget-guidelines) ↔ 서버 코드(budget-guideline-mcp) — 문서 개정과 서버 배포가 서로 독립
+  </text>
+  <text x="65" y="854" font-size="12" fill="#64748b">차이점: 웹페이지는 빌드 시점 스냅샷, MCP 서버는 pull 시점 원문을 매 호출마다 직접 읽음</text>
+</svg>
+</body>
+</html>
