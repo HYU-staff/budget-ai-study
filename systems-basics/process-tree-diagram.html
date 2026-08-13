@@ -1,6 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 482" width="100%" style="max-width:680px" role="img" aria-label="사용자, 쉘, 어플리케이션, 커널의 관계도">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>사용자, 쉘, 어플리케이션, 커널의 관계도</title>
-<desc>사용자는 쉘과 어플리케이션 양쪽에 직접 명령을 내릴 수 있고, 쉘은 또 다른 어플리케이션을 실행시킬 수 있으며, 결국 모든 프로세스는 각자 독립적으로 커널과 통신한다.</desc>
+<style>
+  body {
+    margin: 0;
+    padding: 24px;
+    background: #f7f8fa;
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 { font-size: 20px; color: #1f2937; margin: 0 0 4px; }
+  p.sub { font-size: 13px; color: #6b7280; margin: 0 0 20px; text-align: center; max-width: 680px; }
+  svg { max-width: 680px; width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<h1>사용자, 쉘, 어플리케이션, 커널의 관계도</h1>
+<p class="sub">사용자는 쉘과 어플리케이션 양쪽에 직접 명령을 내릴 수 있고, 쉘은 또 다른 어플리케이션을 실행시킬 수 있으며, 결국 모든 프로세스는 각자 독립적으로 커널과 통신한다.</p>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 482" role="img" aria-label="사용자, 쉘, 어플리케이션, 커널의 관계도">
 <defs>
 <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
 <path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -43,3 +66,5 @@
 <text x="340" y="426" text-anchor="middle" dominant-baseline="central" class="subtitle" fill="#534AB7">모든 프로세스가 직접 통신</text>
 
 </svg>
+</body>
+</html>

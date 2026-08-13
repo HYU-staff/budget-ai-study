@@ -1,6 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 486" width="100%" style="max-width:680px" role="img" aria-label="리눅스와 윈도우의 쉘-커널 구조 비교">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>리눅스와 윈도우의 쉘-커널 구조 비교</title>
-<desc>리눅스는 쉘이 시스템 콜을 통해 바로 커널에 요청하는 반면, 윈도우는 쉘과 NT 커널 사이에 Win32 API라는 추가 계층이 있음을 보여주는 비교 구조도</desc>
+<style>
+  body {
+    margin: 0;
+    padding: 24px;
+    background: #f7f8fa;
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 { font-size: 20px; color: #1f2937; margin: 0 0 4px; }
+  p.sub { font-size: 13px; color: #6b7280; margin: 0 0 20px; text-align: center; max-width: 680px; }
+  svg { max-width: 680px; width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<h1>리눅스와 윈도우의 쉘-커널 구조 비교</h1>
+<p class="sub">리눅스는 쉘이 시스템 콜을 통해 바로 커널에 요청하는 반면, 윈도우는 쉘과 NT 커널 사이에 Win32 API라는 추가 계층이 있음을 보여주는 비교 구조도</p>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 486" role="img" aria-label="리눅스와 윈도우의 쉘-커널 구조 비교">
 <defs>
 <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
 <path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -56,3 +79,5 @@
 <text x="490" y="430" text-anchor="middle" dominant-baseline="central" class="subtitle" fill="#5F5E5A">CPU, 메모리, 디스크, 장치</text>
 
 </svg>
+</body>
+</html>
